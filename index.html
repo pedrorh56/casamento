@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presente de Casamento 🎁</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 30px;
+            background: url('https://i.postimg.cc/nVDL3j5t/Imagem-do-Whats-App-de-2025-01-09-s-20-26-02-c17ace93.jpg') no-repeat center center/cover;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            max-width: 500px;
+            margin: auto;
+        }
+        h1 {
+            color: #ff4081;
+            font-size: 28px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        p {
+            font-size: 18px;
+        }
+        .total {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            animation: bounce 1s infinite alternate;
+        }
+        #qrcode {
+            width: 200px;
+            margin-top: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        #qrcode:hover {
+            transform: scale(1.1);
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes bounce {
+            from { transform: translateY(0px); }
+            to { transform: translateY(5px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎁 Presente de Casamento 🎁</h1>
+        <p>Se quiser nos presentear, você pode doar qualquer valor via Pix! Toda ajuda será muito bem-vinda. 💖</p>
+        
+        <h2 class="total">💰 Total arrecadado: R$ <span id="total">0.00</span></h2>
+        
+        <h3>Doe via Pix</h3>
+        <img id="qrcode" src="https://gerarqrcodepix.com.br/api/v1?brcode=00020126330014BR.GOV.BCB.PIX0111049872082965204000053039865802BR5914PEDRO%20HENRIQUE6011Porto%20Velho62170513ARRECADAMENTO6304A708" alt="QR Code do Pix" onclick="copiarPix()">
+        <p><small>Clique no QR Code para copiar a chave Pix</small></p>
+    </div>
+    
+    <script>
+        const apiUrl = "https://script.google.com/macros/s/AKfycbxZtIMCKEThHrNlMh9LKUc5FPj9NvvFhqz5Cv7hcqosiU9-5HluhWh1bf2y0dOw8hM3/exec";
+        
+        async function atualizarTotal() {
+            try {
+                const response = await fetch(apiUrl + "?action=getTotalArrecadado");
+                if (!response.ok) throw new Error('Erro ao buscar dados');
+                const total = await response.text();
+                document.getElementById('total').innerText = parseFloat(total).toFixed(2);
+            } catch (error) {
+                console.error("Erro ao atualizar o total:", error);
+            }
+        }
+        
+        function copiarPix() {
+            navigator.clipboard.writeText("04987208296");
+            alert("Chave Pix copiada!");
+        }
+        
+        setInterval(atualizarTotal, 5000);
+        atualizarTotal();
+    </script>
+</body>
+</html>
